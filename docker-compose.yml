@@ -1,0 +1,4 @@
+pritunl-client:
+  image: shomatan/pritunl-client:latest-centos7
+  command: /docker-entrypoint.sh
+  restart: always

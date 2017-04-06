@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  vars:
+    image_name: shomatan/pritunl-client:latest-centos7
+  tasks:
+    - name: Commit pritunl client image.
+      shell: docker commit pritunl-client-base {{ image_name }}

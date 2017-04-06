@@ -1,0 +1,8 @@
+#!/bin/bash
+set -x
+exec pritunl-client daemon
+
+pritunl-client import ${URL}
+id=`pritunl-client list | awk 'NR==2 { print $1 }'`
+pritunl-client enable ${id}
+pritunl-client start ${id} --password ${PASSWORD}
