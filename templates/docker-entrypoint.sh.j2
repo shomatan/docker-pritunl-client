@@ -1,0 +1,17 @@
+#!/bin/bash
+
+cd /etc/openvpn
+tee auth.txt << EOF
+${USER}
+${PASS}
+EOF
+
+chmod 600 auth.txt
+
+if [ ! -e main.ovpn ]; then
+  wget -O main.tar ${URL}
+  tar -O -xvf  main.tar > main.ovpn
+  rm -f main.tar
+fi
+
+exec openvpn --config main.ovpn --auth-user-pass auth.txt

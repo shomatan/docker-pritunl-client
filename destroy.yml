@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Destroy pritunl client container.
+      docker_container:
+        name: pritunl-client-base
+        state: absent

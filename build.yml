@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Create pritunl client container.
+      docker_container:
+        name: pritunl-client-base
+        image: centos:7
+        command: /bin/bash
+        tty: yes
+        state: started
+
+- hosts: pritunl-client-base
+  connection: docker
+  roles:
+    - role: shomatan.pritunl-client
+  tasks:
+    - name: Copy docker entrypoint script.
+      template:
+        src: docker-entrypoint.sh.j2
+        dest: /docker-entrypoint.sh
+        mode: 0755
+
+    - name: Install wget.
+      yum:
+        name: wget
+        
+  post_tasks:
+    - name: Purge yum cache.
+      command: yum clean all

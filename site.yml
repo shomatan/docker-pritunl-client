@@ -1,0 +1,4 @@
+---
+- include: build.yml
+- include: commit.yml
+- include: destroy.yml
