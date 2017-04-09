@@ -19,3 +19,11 @@
         src: docker-entrypoint.sh.j2
         dest: /docker-entrypoint.sh
         mode: 0755
+
+    - name: Install wget.
+      yum:
+        name: wget
+        
+  post_tasks:
+    - name: Purge yum cache.
+      command: yum clean all
